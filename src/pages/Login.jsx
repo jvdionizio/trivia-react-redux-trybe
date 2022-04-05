@@ -39,8 +39,8 @@ onInputChange = ({ target }) => {
 
 handleClick = () => {
   const { fetchToken, history } = this.props;
-  fetchToken();
   history.push('/game');
+  fetchToken();
 }
 
 render() {
