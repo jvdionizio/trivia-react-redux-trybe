@@ -3,6 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Question extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      answers: [0, 1, 2, 3],
+    };
+  }
+
   render() {
     const { results, currentQuestion } = this.props;
     return (
