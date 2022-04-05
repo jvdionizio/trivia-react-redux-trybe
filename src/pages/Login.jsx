@@ -37,10 +37,11 @@ onInputChange = ({ target }) => {
   this.setState({ [target.name]: target.value }, this.validateButton);
 }
 
-handleClick = () => {
+handleClick = async () => {
   const { getFetchToken, history } = this.props;
+  await getFetchToken();
+  // await getFetchGameInfo(token);
   history.push('/game');
-  getFetchToken();
 }
 
 render() {
@@ -88,6 +89,11 @@ render() {
 
 const mapDispatchToProps = (dispatch) => ({
   getFetchToken: () => dispatch(fetchToken()),
+  // getFetchGameInfo: (token) => dispatch(fetchGameInfo(token)),
+});
+
+const mapStateToProps = (state) => ({
+  token: state.token,
 });
 
 Login.propTypes = {
@@ -95,4 +101,4 @@ Login.propTypes = {
   getFetchToken: PropTypes.func,
 }.isRequired;
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
