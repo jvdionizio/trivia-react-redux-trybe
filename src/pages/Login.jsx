@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
+import Header from '../components/Header';
+import emailAction from '../Redux/Actions';
 
 class Login extends React.Component {
   constructor() {
@@ -45,6 +47,8 @@ class Login extends React.Component {
 
   render() {
     const { isButtonDisabled, email, name, settings } = this.state;
+    const { login } = this.props;
+    login(email);
     if (settings) {
       return (
         <GameSettings loginPage={ this.settingsPage } />
@@ -93,13 +97,14 @@ class Login extends React.Component {
         >
           Settings
         </button>
+        <Header />
       </>
     );
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
+  login: (email) => dispatch(emailAction(email)),
+});
 
-// });
-
-export default connect(null)(Login);
+export default connect(null, mapDispatchToProps)(Login);

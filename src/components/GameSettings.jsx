@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
-import '../App.css';
 
 class GameSettings extends React.Component {
   render() {
