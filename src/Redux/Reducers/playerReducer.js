@@ -7,6 +7,11 @@ const INITIAL_STATE = {
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+  case 'email':
+    return {
+      ...state,
+      gravatarEmail: action.email,
+    };
   default:
     return state;
   }
