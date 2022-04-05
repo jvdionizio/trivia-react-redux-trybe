@@ -38,9 +38,9 @@ onInputChange = ({ target }) => {
 }
 
 handleClick = () => {
-  const { fetchToken, history } = this.props;
+  const { getFetchToken, history } = this.props;
   history.push('/game');
-  fetchToken();
+  getFetchToken();
 }
 
 render() {
@@ -87,12 +87,12 @@ render() {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchToken: () => dispatch(fetchToken()),
+  getFetchToken: () => dispatch(fetchToken()),
 });
 
 Login.propTypes = {
   history: PropTypes.objectOf(PropTypes.any),
-  fetchToken: PropTypes.func,
+  getFetchToken: PropTypes.func,
 }.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);
