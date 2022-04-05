@@ -1,8 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import logo from '../trivia.png';
+// import logo from '../trivia.png';
 import '../App.css';
+import { fetchToken } from '../Redux/Actions';
 
 class Login extends React.Component {
   constructor() {
@@ -33,6 +35,12 @@ class Login extends React.Component {
 
 onInputChange = ({ target }) => {
   this.setState({ [target.name]: target.value }, this.validateButton);
+}
+
+handleClick = () => {
+  const { fetchToken, history } = this.props;
+  fetchToken();
+  history.push('/game');
 }
 
 render() {
@@ -69,6 +77,7 @@ render() {
         disabled={ isButtonDisabled }
         type="button"
         data-testid="btn-play"
+        onClick={ this.handleClick }
       >
         Play
       </button>
@@ -78,7 +87,12 @@ render() {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-
+  fetchToken: () => dispatch(fetchToken()),
 });
+
+Login.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any),
+  fetchToken: PropTypes.func,
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Login);
