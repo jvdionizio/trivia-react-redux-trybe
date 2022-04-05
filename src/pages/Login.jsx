@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import logo from '../trivia.png';
 import '../App.css';
+import GameSettings from '../components/GameSettings';
 
 class Login extends React.Component {
   constructor() {
@@ -12,6 +12,7 @@ class Login extends React.Component {
       email: '',
       name: '',
       isButtonDisabled: true,
+      settings: false,
     };
   }
 
@@ -31,54 +32,74 @@ class Login extends React.Component {
     }
   }
 
-onInputChange = ({ target }) => {
-  this.setState({ [target.name]: target.value }, this.validateButton);
-}
+  settingsPage = () => {
+    const { settings } = this.state;
+    this.setState({
+      settings: !settings,
+    });
+  }
 
-render() {
-  const { isButtonDisabled, email, name } = this.state;
-  return (
-    <>
-      {/* <header className="App-header">
+  onInputChange = ({ target }) => {
+    this.setState({ [target.name]: target.value }, this.validateButton);
+  }
+
+  render() {
+    const { isButtonDisabled, email, name, settings } = this.state;
+    if (settings) {
+      return (
+        <GameSettings loginPage={ this.settingsPage } />
+      );
+    }
+    return (
+      <>
+        {/* <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
         </header> */}
 
-      <label htmlFor="nameInput">
-        <input
-          type="text"
-          name="name"
-          data-testid="input-player-name"
-          id="nameInput"
-          value={ name }
-          onChange={ this.onInputChange }
-        />
-      </label>
+        <label htmlFor="nameInput">
+          <input
+            type="text"
+            name="name"
+            data-testid="input-player-name"
+            id="nameInput"
+            value={ name }
+            onChange={ this.onInputChange }
+          />
+        </label>
 
-      <label htmlFor="gravatarEmailInput">
-        <input
-          type="email"
-          name="email"
-          id="gravatarEmailInput"
-          data-testid="input-gravatar-email"
-          onChange={ this.onInputChange }
-          value={ email }
-        />
-      </label>
+        <label htmlFor="gravatarEmailInput">
+          <input
+            type="email"
+            name="email"
+            id="gravatarEmailInput"
+            data-testid="input-gravatar-email"
+            onChange={ this.onInputChange }
+            value={ email }
+          />
+        </label>
 
-      <button
-        disabled={ isButtonDisabled }
-        type="button"
-        data-testid="btn-play"
-      >
-        Play
-      </button>
-    </>
-  );
+        <button
+          disabled={ isButtonDisabled }
+          type="button"
+          data-testid="btn-play"
+        >
+          Play
+        </button>
+
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.settingsPage }
+        >
+          Settings
+        </button>
+      </>
+    );
+  }
 }
-}
 
-const mapDispatchToProps = (dispatch) => ({
+// const mapDispatchToProps = (dispatch) => ({
 
-});
+// });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null)(Login);
