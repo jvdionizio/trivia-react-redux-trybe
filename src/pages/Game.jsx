@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from '../components/Question';
+import Header from '../components/Header';
 
 class Game extends Component {
   render() {
@@ -9,6 +10,7 @@ class Game extends Component {
     console.log(results);
     return (
       <div>
+        <Header />
         <h1>Jogo</h1>
         <Question />
       </div>

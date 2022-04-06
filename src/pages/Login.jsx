@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 // import logo from '../trivia.png';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
-import Header from '../components/Header';
-import { emailAction, fetchToken } from '../Redux/Actions';
+import { gravatarAction, fetchToken, nameAction } from '../Redux/Actions';
+import profilePictureAPI from '../Helpers/profilePictureAPI';
 
 class Login extends React.Component {
   constructor() {
@@ -16,8 +16,19 @@ class Login extends React.Component {
       name: '',
       isButtonDisabled: true,
       settings: false,
+      gravatar: '',
     };
   }
+
+  getGravatarImg = async () => {
+    const { email } = this.state;
+    const image = await profilePictureAPI(email);
+    console.log(image);
+
+    this.setState({
+      gravatar: image,
+    });
+  };
 
   validateButton = () => {
     const { email, name } = this.state;
@@ -50,13 +61,16 @@ handleClick = async () => {
   const { getFetchToken, history } = this.props;
   await getFetchToken();
   // await getFetchGameInfo(token);
+  await this.getGravatarImg();
   history.push('/game');
 }
 
 render() {
-  const { isButtonDisabled, email, name, settings } = this.state;
-  const { login } = this.props;
-  login(email);
+  const { isButtonDisabled, gravatar, name, settings, email } = this.state;
+  const { gravatarImg, nameProp } = this.props;
+  gravatarImg(gravatar);
+  console.log(gravatar);
+  nameProp(name);
   if (settings) {
     return (
       <GameSettings loginPage={ this.settingsPage } />
@@ -104,19 +118,19 @@ render() {
       >
         Settings
       </button>
-      <Header />
     </>
   );
 }
 }
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
+  gravatarImg: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   getFetchToken: () => dispatch(fetchToken()),
-  login: (email) => dispatch(emailAction(email)),
+  gravatarImg: (gravatar) => dispatch(gravatarAction(gravatar)),
+  nameProp: (name) => dispatch(nameAction(name)),
 });
 
 const mapStateToProps = (state) => ({
