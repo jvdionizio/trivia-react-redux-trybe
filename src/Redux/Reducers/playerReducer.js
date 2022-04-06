@@ -7,10 +7,15 @@ const INITIAL_STATE = {
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case 'email':
+  case 'gravatarImg':
     return {
       ...state,
-      gravatarEmail: action.email,
+      gravatarEmail: action.gravatar,
+    };
+  case 'name':
+    return {
+      ...state,
+      name: action.name,
     };
   default:
     return state;

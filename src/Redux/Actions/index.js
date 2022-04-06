@@ -21,7 +21,12 @@ export function fetchToken() {
       .catch((error) => dispatch(failedRequest(error))));
 }
 
-export const emailAction = (email) => ({
-  type: 'email',
-  email,
+export const gravatarAction = (gravatar) => ({
+  type: 'gravatarImg',
+  gravatar,
+});
+
+export const nameAction = (name) => ({
+  type: 'name',
+  name,
 });

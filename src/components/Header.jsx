@@ -1,39 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import profilePictureAPI from '../Helpers/profilePictureAPI';
 
 class Header extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      imageScr: '',
-    };
-  }
-
-  componentDidMount() {
-    this.getProfilePicture();
-  }
-
-  getProfilePicture = async () => {
-    const { email } = this.props;
-    const data = await profilePictureAPI(email);
-    console.log(data);
-    this.setState({ imageScr: data });
-  };
-
   render() {
-    const { email } = this.props;
-    const { imageScr } = this.state;
+    const { gravatar, name } = this.props;
+    console.log(gravatar);
     return (
       <div>
         <img
-          src={ imageScr }
+          src={ gravatar }
           alt="Ícone do Jogador"
           data-testid="header-profile-picture"
         />
-        <p data-testid="header-player-name">{email}</p>
+        <p data-testid="header-player-name">{ name }</p>
         <p data-testid="header-score">Placar: 0</p>
       </div>
     );
@@ -41,11 +21,13 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  email: PropTypes.string.isRequired,
+  gravatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (store) => ({
-  email: store.player.gravatarEmail,
+  gravatar: store.player.gravatarEmail,
+  name: store.player.name,
 });
 
 export default connect(mapStateToProps)(Header);
