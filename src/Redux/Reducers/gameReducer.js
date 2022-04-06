@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   results: [],
   currentQuestion: 0,
+  timer: 30,
 };
 
 const game = (state = INITIAL_STATE, action) => {
@@ -9,6 +10,11 @@ const game = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       results: action.payload,
+    };
+  case 'SET_TIMER':
+    return {
+      ...state,
+      timer: action.payload,
     };
   default:
     return state;

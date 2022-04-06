@@ -30,3 +30,7 @@ export const nameAction = (name) => ({
   type: 'name',
   name,
 });
+
+export function setTimer(timer) {
+  return { type: 'SET_TIMER', payload: timer };
+}
