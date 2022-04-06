@@ -20,3 +20,8 @@ export function fetchToken() {
       .then((json) => dispatch(getGameInfo(json)))
       .catch((error) => dispatch(failedRequest(error))));
 }
+
+export const emailAction = (email) => ({
+  type: 'email',
+  email,
+});
