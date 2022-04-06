@@ -71,6 +71,13 @@ class Question extends Component {
     }
   }
 
+  verifyTimer = () => {
+    const { timer } = this.props;
+    if (timer === 0) {
+      return true;
+    }
+  }
+
   render() {
     const { results, currentQuestion } = this.props;
     const { loading, answers } = this.state;
@@ -92,6 +99,7 @@ class Question extends Component {
                     data-testid={ this.isCorrect(answer) }
                     className={ this.isActive(answer) }
                     onClick={ this.handleClick }
+                    disabled={ this.verifyTimer() }
                   >
                     {answer}
                   </button>))}
@@ -108,6 +116,7 @@ const mapStateToProps = (state) => ({
   currentQuestion: state.game.currentQuestion,
   correctAnswerGame: state.game.results[0].correct_answer,
   incorrectAnswersGame: state.game.results[0].incorrect_answers,
+  timer: state.game.timer,
 });
 
 Question.propTypes = {

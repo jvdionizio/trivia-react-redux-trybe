@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Question from '../components/Question';
 import Header from '../components/Header';
+import Timer from '../components/Timer';
 
 class Game extends Component {
   render() {
@@ -11,6 +12,7 @@ class Game extends Component {
     return (
       <div>
         <Header />
+        <Timer />
         <h1>Jogo</h1>
         <Question />
       </div>
