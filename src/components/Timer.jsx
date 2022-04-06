@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTimer } from '../Redux/Actions';
-// import PropTypes from 'prop-types';
 
 class Timer extends React.Component {
   constructor() {
@@ -20,8 +20,6 @@ class Timer extends React.Component {
 
   componentDidUpdate() {
     const { seconds } = this.state;
-    // const { timer } = this.props;
-    // timer(seconds);
     if (seconds === 0) {
       clearInterval(this.counter);
     }
@@ -49,5 +47,9 @@ class Timer extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   timer: (seconds) => dispatch(setTimer(seconds)),
 });
+
+Timer.propTypes = {
+  timer: PropTypes.number,
+}.isRequired;
 
 export default connect(null, mapDispatchToProps)(Timer);
