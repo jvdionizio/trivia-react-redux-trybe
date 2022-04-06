@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loading from './Loading';
+import '../styles/Question.css';
 
 class Question extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class Question extends Component {
       correctAnswer: '',
       answers: [],
       loading: true,
+      color: false,
     };
   }
 
@@ -55,6 +57,20 @@ class Question extends Component {
     return (`wrong-answer-${wrongAnswers.indexOf(answer)}`);
   }
 
+  handleClick = () => {
+    this.setState({
+      color: true,
+    });
+  }
+
+  isActive = (answer) => {
+    const { color, correctAnswer } = this.state;
+    if (color === true) {
+      if (correctAnswer === answer) return 'correct-answer';
+      return 'wrong-answer';
+    }
+  }
+
   render() {
     const { results, currentQuestion } = this.props;
     const { loading, answers } = this.state;
@@ -74,6 +90,8 @@ class Question extends Component {
                     type="button"
                     key={ index }
                     data-testid={ this.isCorrect(answer) }
+                    className={ this.isActive(answer) }
+                    onClick={ this.handleClick }
                   >
                     {answer}
                   </button>))}
