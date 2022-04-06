@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-// import logo from '../trivia.png';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
-import { gravatarAction, fetchToken, nameAction } from '../Redux/Actions';
-import profilePictureAPI from '../Helpers/profilePictureAPI';
+import { fetchToken, nameAction, gravatarAction } from '../Redux/Actions';
 
 class Login extends React.Component {
   constructor() {
@@ -20,20 +18,9 @@ class Login extends React.Component {
     };
   }
 
-  getGravatarImg = async () => {
-    const { email } = this.state;
-    const image = await profilePictureAPI(email);
-    console.log(image);
-
-    this.setState({
-      gravatar: image,
-    });
-  };
-
   validateButton = () => {
     const { email, name } = this.state;
     const minPasswordLength = 0;
-    // Regex encontrado no link: https://www.w3resource.com/javascript/form/email-validation.php
     const emailFormatRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     if (name.length > minPasswordLength && email.match(emailFormatRegex)) {
       this.setState({
@@ -58,17 +45,16 @@ onInputChange = ({ target }) => {
 }
 
 handleClick = async () => {
-  const { getFetchToken, history } = this.props;
+  const { getFetchToken, history, gravatarImg } = this.props;
+  const { email } = this.state;
   await getFetchToken();
-  // await getFetchGameInfo(token);
-  await this.getGravatarImg();
+  gravatarImg(email);
   history.push('/game');
 }
 
 render() {
   const { isButtonDisabled, gravatar, name, settings, email } = this.state;
-  const { gravatarImg, nameProp } = this.props;
-  gravatarImg(gravatar);
+  const { nameProp } = this.props;
   console.log(gravatar);
   nameProp(name);
   if (settings) {
@@ -78,10 +64,6 @@ render() {
   }
   return (
     <>
-      {/* <header className="App-header">
-          <img src={ logo } className="App-logo" alt="logo" />
-        </header> */}
-
       <label htmlFor="nameInput">
         <input
           type="text"
@@ -122,10 +104,6 @@ render() {
   );
 }
 }
-
-Login.propTypes = {
-  gravatarImg: PropTypes.func.isRequired,
-};
 
 const mapDispatchToProps = (dispatch) => ({
   getFetchToken: () => dispatch(fetchToken()),
