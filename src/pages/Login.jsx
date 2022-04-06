@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
@@ -102,6 +102,10 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   login: (email) => dispatch(emailAction(email)),
