@@ -3,9 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import logo from '../trivia.png';
 import '../App.css';
-import { fetchToken, emailAction } from '../Redux/Actions';
 import GameSettings from '../components/GameSettings';
 import Header from '../components/Header';
+import { emailAction, fetchToken } from '../Redux/Actions';
 
 class Login extends React.Component {
   constructor() {
@@ -43,7 +43,7 @@ class Login extends React.Component {
   }
 
 onInputChange = ({ target }) => {
-    this.setState({ [target.name]: target.value }, this.validateButton);
+  this.setState({ [target.name]: target.value }, this.validateButton);
 }
 
 handleClick = async () => {
@@ -58,37 +58,37 @@ render() {
   const { login } = this.props;
   login(email);
   if (settings) {
-      return (
-        <GameSettings loginPage={ this.settingsPage } />
-      );
-    }
-   return (
+    return (
+      <GameSettings loginPage={ this.settingsPage } />
+    );
+  }
+  return (
     <>
-        {/* <header className="App-header">
+      {/* <header className="App-header">
           <img src={ logo } className="App-logo" alt="logo" />
         </header> */}
 
-        <label htmlFor="nameInput">
-          <input
-            type="text"
-            name="name"
-            data-testid="input-player-name"
-            id="nameInput"
-            value={ name }
-            onChange={ this.onInputChange }
-          />
-        </label>
+      <label htmlFor="nameInput">
+        <input
+          type="text"
+          name="name"
+          data-testid="input-player-name"
+          id="nameInput"
+          value={ name }
+          onChange={ this.onInputChange }
+        />
+      </label>
 
-        <label htmlFor="gravatarEmailInput">
-          <input
-            type="email"
-            name="email"
-            id="gravatarEmailInput"
-            data-testid="input-gravatar-email"
-            onChange={ this.onInputChange }
-            value={ email }
-          />
-        </label>
+      <label htmlFor="gravatarEmailInput">
+        <input
+          type="email"
+          name="email"
+          id="gravatarEmailInput"
+          data-testid="input-gravatar-email"
+          onChange={ this.onInputChange }
+          value={ email }
+        />
+      </label>
       <button
         disabled={ isButtonDisabled }
         type="button"
@@ -101,7 +101,7 @@ render() {
         type="button"
         data-testid="btn-settings"
         onClick={ this.settingsPage }
-       >
+      >
         Settings
       </button>
       <Header />
