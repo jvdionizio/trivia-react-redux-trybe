@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 import '../styles/Question.css';
-import { addScore } from '../Redux/Actions';
+import { addScore, nextQuestion } from '../Redux/Actions';
+import NextButton from './NextButton';
 
 class Question extends Component {
   constructor() {
@@ -22,6 +23,17 @@ class Question extends Component {
     const { results, currentQuestion } = this.props;
     this.setState({
       correctAnswer: results[currentQuestion].correct_answer,
+      answers: [...results[currentQuestion].incorrect_answers,
+        results[currentQuestion].correct_answer],
+    }, () => this.handleQuestions());
+  }
+
+  setNextQuestion = () => {
+    const { currentQuestion, btnNextQuestion, results } = this.props;
+    btnNextQuestion(currentQuestion + 1);
+    this.setState({
+      correctAnswer: results[currentQuestion].correct_answer,
+      questionAnswered: false,
       answers: [...results[currentQuestion].incorrect_answers,
         results[currentQuestion].correct_answer],
     }, () => this.handleQuestions());
@@ -112,13 +124,14 @@ class Question extends Component {
 
   render() {
     const { results, currentQuestion } = this.props;
-    const { loading, answers } = this.state;
+    const { loading, answers, questionAnswered } = this.state;
     return (
       <div>
         {loading === true
           ? <Loading />
           : (
             <div>
+              { questionAnswered && <NextButton nextQuestion={ this.setNextQuestion } /> }
               <h2 data-testid="question-category">{results[currentQuestion].category}</h2>
               <p data-testid="question-text">
                 {results[currentQuestion].question}
@@ -152,6 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   newScore: (score) => dispatch(addScore(score)),
+  btnNextQuestion: (question) => dispatch(nextQuestion(question)),
 });
 
 Question.propTypes = {

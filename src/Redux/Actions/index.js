@@ -38,3 +38,7 @@ export function setTimer(timer) {
 export function addScore(score) {
   return { type: 'ADD_SCORE', payload: score };
 }
+
+export function nextQuestion(question) {
+  return { type: 'NEXT_QUESTION', payload: question };
+}
