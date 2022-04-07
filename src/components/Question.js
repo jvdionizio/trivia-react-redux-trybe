@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Loading from './Loading';
+import { addQtdCorrectAnswers, addScore, nextQuestion } from '../Redux/Actions';
 import '../styles/Question.css';
-import { addScore, nextQuestion } from '../Redux/Actions';
 import NextButton from './NextButton';
+import Loading from './Loading';
 
 class Question extends Component {
   constructor() {
@@ -16,6 +16,7 @@ class Question extends Component {
       loading: true,
       color: false,
       questionAnswered: false,
+      qtdCorrectAnswers: 0,
     };
   }
 
@@ -73,8 +74,8 @@ class Question extends Component {
   }
 
   scoreCalculation = (answer, timer, difficulty) => {
-    const { correctAnswer } = this.state;
-    const { score, newScore } = this.props;
+    const { correctAnswer, qtdCorrectAnswers } = this.state;
+    const { score, newScore, countCorrectAnswers } = this.props;
     let difficultyValue = 0;
     const UM = 1;
     const DOIS = 2;
@@ -91,6 +92,7 @@ class Question extends Component {
     }
     if (correctAnswer === answer) {
       newScore(score + DEZ + (difficultyValue * timer));
+      countCorrectAnswers(qtdCorrectAnswers + 1);
     }
   };
 
@@ -166,6 +168,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   newScore: (score) => dispatch(addScore(score)),
   btnNextQuestion: (question) => dispatch(nextQuestion(question)),
+  countCorrectAnswers: (answer) => dispatch(addQtdCorrectAnswers(answer)),
 });
 
 Question.propTypes = {

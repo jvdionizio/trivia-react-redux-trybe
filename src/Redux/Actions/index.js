@@ -41,4 +41,7 @@ export function addScore(score) {
 
 export function nextQuestion(question) {
   return { type: 'NEXT_QUESTION', payload: question };
+  
+export function addQtdCorrectAnswers(answer) {
+  return { type: 'ADD_CORRECT_ANSWER', payload: answer };  
 }
