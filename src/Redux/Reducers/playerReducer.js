@@ -17,6 +17,11 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       name: action.name,
     };
+  case 'ADD_SCORE':
+    return {
+      ...state,
+      score: action.payload,
+    };
   default:
     return state;
   }

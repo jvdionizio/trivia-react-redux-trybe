@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loading from './Loading';
 import '../styles/Question.css';
+import { addScore } from '../Redux/Actions';
 
 class Question extends Component {
   constructor() {
@@ -13,14 +14,16 @@ class Question extends Component {
       answers: [],
       loading: true,
       color: false,
+      questionAnswered: false,
     };
   }
 
   componentDidMount() {
-    const { incorrectAnswersGame, correctAnswerGame } = this.props;
+    const { results, currentQuestion } = this.props;
     this.setState({
-      correctAnswer: correctAnswerGame,
-      answers: [...incorrectAnswersGame, correctAnswerGame],
+      correctAnswer: results[currentQuestion].correct_answer,
+      answers: [...results[currentQuestion].incorrect_answers,
+        results[currentQuestion].correct_answer],
     }, () => this.handleQuestions());
   }
 
@@ -57,9 +60,37 @@ class Question extends Component {
     return (`wrong-answer-${wrongAnswers.indexOf(answer)}`);
   }
 
-  handleClick = () => {
+  scoreCalculation = (answer, timer, difficulty) => {
+    const { correctAnswer } = this.state;
+    const { score, newScore } = this.props;
+    let difficultyValue = 0;
+    const UM = 1;
+    const DOIS = 2;
+    const TRES = 3;
+    const DEZ = 10;
+    if (difficulty === 'hard') {
+      difficultyValue = TRES;
+    }
+    if (difficulty === 'medium') {
+      difficultyValue = DOIS;
+    }
+    if (difficulty === 'easy') {
+      difficultyValue = UM;
+    }
+    if (correctAnswer === answer) {
+      newScore(score + DEZ + (difficultyValue * timer));
+    }
+  };
+
+  handleClick = (selected) => {
+    const { timer, results, currentQuestion } = this.props;
+    const level = results[currentQuestion].difficulty;
     this.setState({
       color: true,
+    });
+    this.scoreCalculation(selected, timer, level);
+    this.setState({
+      questionAnswered: true,
     });
   }
 
@@ -72,8 +103,9 @@ class Question extends Component {
   }
 
   verifyTimer = () => {
+    const { questionAnswered } = this.state;
     const { timer } = this.props;
-    if (timer === 0) {
+    if (timer === 0 || questionAnswered === true) {
       return true;
     }
   }
@@ -98,7 +130,7 @@ class Question extends Component {
                     key={ index }
                     data-testid={ this.isCorrect(answer) }
                     className={ this.isActive(answer) }
-                    onClick={ this.handleClick }
+                    onClick={ () => this.handleClick(answer) }
                     disabled={ this.verifyTimer() }
                   >
                     {answer}
@@ -114,9 +146,12 @@ class Question extends Component {
 const mapStateToProps = (state) => ({
   results: state.game.results,
   currentQuestion: state.game.currentQuestion,
-  correctAnswerGame: state.game.results[0].correct_answer,
-  incorrectAnswersGame: state.game.results[0].incorrect_answers,
   timer: state.game.timer,
+  score: state.player.score,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  newScore: (score) => dispatch(addScore(score)),
 });
 
 Question.propTypes = {
@@ -124,4 +159,4 @@ Question.propTypes = {
   currentQuestion: PropTypes.number,
 }.isRequired;
 
-export default connect(mapStateToProps)(Question);
+export default connect(mapStateToProps, mapDispatchToProps)(Question);

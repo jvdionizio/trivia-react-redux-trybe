@@ -34,3 +34,7 @@ export const nameAction = (name) => ({
 export function setTimer(timer) {
   return { type: 'SET_TIMER', payload: timer };
 }
+
+export function addScore(score) {
+  return { type: 'ADD_SCORE', payload: score };
+}
