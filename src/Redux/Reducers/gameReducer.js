@@ -16,6 +16,11 @@ const game = (state = INITIAL_STATE, action) => {
       ...state,
       timer: action.payload,
     };
+  case 'NEXT_QUESTION':
+    return {
+      ...state,
+      currentQuestion: action.payload,
+    };
   default:
     return state;
   }
