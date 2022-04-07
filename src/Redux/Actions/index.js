@@ -38,3 +38,7 @@ export function setTimer(timer) {
 export function addScore(score) {
   return { type: 'ADD_SCORE', payload: score };
 }
+
+export function addQtdCorrectAnswers(answer) {
+  return { type: 'ADD_CORRECT_ANSWER', payload: answer };
+}
