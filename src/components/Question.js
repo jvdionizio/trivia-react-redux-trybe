@@ -36,14 +36,12 @@ class Question extends Component {
       btnNextQuestion(currentQuestion + 1);
       this.setState({
         color: false,
-        correctAnswer: results[currentQuestion].correct_answer,
+        correctAnswer: results[currentQuestion + 1].correct_answer,
         questionAnswered: false,
-        answers: [...results[currentQuestion].incorrect_answers,
-          results[currentQuestion].correct_answer],
+        answers: [...results[currentQuestion + 1].incorrect_answers,
+          results[currentQuestion + 1].correct_answer],
       }, () => this.handleQuestions());
-    } /* else {
-      history.push('/');
-    } */
+    }
   }
 
   handleQuestions = () => {
