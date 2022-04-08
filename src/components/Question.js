@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addQtdCorrectAnswers, addScore, nextQuestion } from '../Redux/Actions';
+import { Link } from 'react-router-dom';
+import { addQtdCorrectAnswers, addScore,
+  answerQuestion, nextQuestion } from '../Redux/Actions';
 import '../styles/Question.css';
 import NextButton from './NextButton';
 import Loading from './Loading';
@@ -31,13 +33,18 @@ class Question extends Component {
 
   setNextQuestion = () => {
     const { currentQuestion, btnNextQuestion, results } = this.props;
-    btnNextQuestion(currentQuestion + 1);
-    this.setState({
-      correctAnswer: results[currentQuestion].correct_answer,
-      questionAnswered: false,
-      answers: [...results[currentQuestion].incorrect_answers,
-        results[currentQuestion].correct_answer],
-    }, () => this.handleQuestions());
+    if (currentQuestion < results.length - 1) {
+      btnNextQuestion(currentQuestion + 1);
+      this.setState({
+        color: false,
+        correctAnswer: results[currentQuestion].correct_answer,
+        questionAnswered: false,
+        answers: [...results[currentQuestion].incorrect_answers,
+          results[currentQuestion].correct_answer],
+      }, () => this.handleQuestions());
+    } /* else {
+      history.push('/');
+    } */
   }
 
   handleQuestions = () => {
@@ -97,7 +104,7 @@ class Question extends Component {
   };
 
   handleClick = (selected) => {
-    const { timer, results, currentQuestion } = this.props;
+    const { timer, results, currentQuestion, setAnswer } = this.props;
     const level = results[currentQuestion].difficulty;
     this.setState({
       color: true,
@@ -106,6 +113,7 @@ class Question extends Component {
     this.setState({
       questionAnswered: true,
     });
+    setAnswer();
   }
 
   isActive = (answer) => {
@@ -133,7 +141,9 @@ class Question extends Component {
           ? <Loading />
           : (
             <div>
-              { questionAnswered && <NextButton nextQuestion={ this.setNextQuestion } /> }
+              { questionAnswered && (currentQuestion < results.length - 1
+                ? <NextButton nextQuestion={ this.setNextQuestion } />
+                : <Link to="/feedback"><NextButton /></Link>) }
               <h2 data-testid="question-category">{results[currentQuestion].category}</h2>
               <p data-testid="question-text">
                 {results[currentQuestion].question}
@@ -169,9 +179,11 @@ const mapDispatchToProps = (dispatch) => ({
   newScore: (score) => dispatch(addScore(score)),
   btnNextQuestion: (question) => dispatch(nextQuestion(question)),
   countCorrectAnswers: (answer) => dispatch(addQtdCorrectAnswers(answer)),
+  setAnswer: () => dispatch(answerQuestion()),
 });
 
 Question.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any),
   results: PropTypes.arrayOf(PropTypes.any),
   currentQuestion: PropTypes.number,
 }.isRequired;
