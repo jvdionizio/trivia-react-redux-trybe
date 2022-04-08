@@ -28,6 +28,13 @@ const game = (state = INITIAL_STATE, action) => {
       ...state,
       answered: 'respondido',
     };
+  case 'NEW_GAME':
+    return {
+      results: [],
+      currentQuestion: 0,
+      timer: 30,
+      answered: '',
+    };
   default:
     return state;
   }

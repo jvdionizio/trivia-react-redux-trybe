@@ -27,6 +27,13 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       assertions: action.payload,
     };
+  case 'NEW_GAME':
+    return {
+      name: '',
+      assertions: 0,
+      score: 0,
+      gravatarEmail: 'email@pessoa.com',
+    };
   default:
     return state;
   }

@@ -50,3 +50,7 @@ export function answerQuestion() {
 export function addQtdCorrectAnswers(answer) {
   return { type: 'ADD_CORRECT_ANSWER', payload: answer };
 }
+
+export function newGame() {
+  return { type: 'NEW_GAME' };
+}

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import { newGame } from '../Redux/Actions';
 
 class Feedback extends Component {
   componentDidMount() {
@@ -10,13 +11,14 @@ class Feedback extends Component {
   }
 
   addToLocalStorage = () => {
-    const { assertions, score } = this.props;
+    const { assertions, score, playerName } = this.props;
     localStorage.setItem('assertions', JSON.stringify(assertions));
     localStorage.setItem('score', JSON.stringify(score));
+    localStorage.setItem('playerName', JSON.stringify(playerName));
   }
 
   render() {
-    const { assertions, score } = this.props;
+    const { assertions, score, playAgain } = this.props;
     const TRES = 3;
     return (
       <>
@@ -41,7 +43,19 @@ class Feedback extends Component {
         </div>
         <div>
           <Link to="/">
-            <button type="button" data-testid="btn-play-again">Play Again</button>
+            <button
+              type="button"
+              data-testid="btn-play-again"
+              onClick={ playAgain }
+            >
+              Play Again
+
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/ranking">
+            <button type="button" data-testid="btn-ranking">Ranking</button>
           </Link>
         </div>
       </>
@@ -52,6 +66,11 @@ class Feedback extends Component {
 const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
+  playerName: state.player.name,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  playAgain: () => dispatch(newGame()),
 });
 
 Feedback.propTypes = {
@@ -59,4 +78,4 @@ Feedback.propTypes = {
   score: PropTypes.number,
 }.isRequired;
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
