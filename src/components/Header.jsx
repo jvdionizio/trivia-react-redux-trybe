@@ -1,12 +1,11 @@
+import md5 from 'crypto-js/md5';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import md5 from 'crypto-js/md5';
 
 class Header extends React.Component {
   render() {
     const { name, email, score } = this.props;
-    console.log(email);
     const emailHash = md5(email).toString();
     return (
       <div>

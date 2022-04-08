@@ -1,3 +1,4 @@
+import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -11,10 +12,29 @@ class Feedback extends Component {
   }
 
   addToLocalStorage = () => {
-    const { assertions, score, playerName } = this.props;
-    localStorage.setItem('assertions', JSON.stringify(assertions));
-    localStorage.setItem('score', JSON.stringify(score));
-    localStorage.setItem('playerName', JSON.stringify(playerName));
+    const currentRanking = JSON.parse(localStorage.getItem('ranking'));
+    if (currentRanking) {
+      const { score, playerName, gravatarEmail } = this.props;
+      const hashEmail = md5(gravatarEmail).toString();
+      const picture = `https://www.gravatar.com/avatar/${hashEmail}`;
+      const newPlayer = {
+        name: playerName,
+        score,
+        picture,
+      };
+      const ranking = [...currentRanking, newPlayer];
+      localStorage.setItem('ranking', JSON.stringify(ranking));
+    } else {
+      const { score, playerName, gravatarEmail } = this.props;
+      const hashEmail = md5(gravatarEmail).toString();
+      const picture = `https://www.gravatar.com/avatar/${hashEmail}`;
+      const newPlayer = [{
+        name: playerName,
+        score,
+        picture,
+      }];
+      localStorage.setItem('ranking', JSON.stringify(newPlayer));
+    }
   }
 
   render() {
@@ -67,6 +87,7 @@ const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   score: state.player.score,
   playerName: state.player.name,
+  gravatarEmail: state.player.gravatarEmail,
 });
 
 const mapDispatchToProps = (dispatch) => ({

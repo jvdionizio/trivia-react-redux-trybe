@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Question from '../components/Question';
 import Header from '../components/Header';
+import Question from '../components/Question';
 import Timer from '../components/Timer';
 
 class Game extends Component {
   render() {
-    const { results, answered } = this.props;
-    console.log(results);
+    const { answered } = this.props;
     return (
       <div>
         <Header />

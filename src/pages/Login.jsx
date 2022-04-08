@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
-import { fetchToken, nameAction, gravatarAction } from '../Redux/Actions';
+import { fetchToken, gravatarAction, nameAction } from '../Redux/Actions';
 
 class Login extends React.Component {
   constructor() {
@@ -14,7 +14,6 @@ class Login extends React.Component {
       name: '',
       isButtonDisabled: true,
       settings: false,
-      gravatar: '',
     };
   }
 
@@ -53,9 +52,8 @@ handleClick = async () => {
 }
 
 render() {
-  const { isButtonDisabled, gravatar, name, settings, email } = this.state;
+  const { isButtonDisabled, name, settings, email } = this.state;
   const { nameProp } = this.props;
-  console.log(gravatar);
   nameProp(name);
   if (settings) {
     return (

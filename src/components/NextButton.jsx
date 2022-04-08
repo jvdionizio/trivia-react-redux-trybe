@@ -1,10 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 class NextButton extends React.Component {
   render() {
     const { nextQuestion } = this.props;
-    console.log(nextQuestion);
     return (
       <div>
         <button
