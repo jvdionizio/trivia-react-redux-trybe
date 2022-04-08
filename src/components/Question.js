@@ -18,7 +18,6 @@ class Question extends Component {
       loading: true,
       color: false,
       questionAnswered: false,
-      qtdCorrectAnswers: 0,
     };
   }
 
@@ -81,8 +80,8 @@ class Question extends Component {
   }
 
   scoreCalculation = (answer, timer, difficulty) => {
-    const { correctAnswer, qtdCorrectAnswers } = this.state;
-    const { score, newScore, countCorrectAnswers } = this.props;
+    const { correctAnswer } = this.state;
+    const { score, newScore, countCorrectAnswers, assertions } = this.props;
     let difficultyValue = 0;
     const UM = 1;
     const DOIS = 2;
@@ -99,7 +98,7 @@ class Question extends Component {
     }
     if (correctAnswer === answer) {
       newScore(score + DEZ + (difficultyValue * timer));
-      countCorrectAnswers(qtdCorrectAnswers + 1);
+      countCorrectAnswers(assertions + 1);
     }
   };
 
@@ -173,6 +172,7 @@ const mapStateToProps = (state) => ({
   currentQuestion: state.game.currentQuestion,
   timer: state.game.timer,
   score: state.player.score,
+  assertions: state.player.assertions,
 });
 
 const mapDispatchToProps = (dispatch) => ({

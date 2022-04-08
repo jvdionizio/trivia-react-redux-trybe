@@ -3,7 +3,6 @@ const INITIAL_STATE = {
   assertions: 0,
   score: 0,
   gravatarEmail: 'email@pessoa.com',
-  qtdCorrectAnswers: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -23,11 +22,11 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       score: action.payload,
     };
-  /* case 'ADD_CORRECT_ANSWER':
+  case 'ADD_CORRECT_ANSWER':
     return {
       ...state,
-      qtdCorrectAnswers: [...qtdCorrectAnswers + action.payload],
-    }; */
+      assertions: action.payload,
+    };
   default:
     return state;
   }
