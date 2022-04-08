@@ -13,6 +13,7 @@ class Timer extends React.Component {
 
   componentDidMount() {
     const interval = 1000;
+
     this.counter = setInterval(() => {
       this.handleSeconds();
     }, interval);
@@ -20,7 +21,8 @@ class Timer extends React.Component {
 
   componentDidUpdate() {
     const { seconds } = this.state;
-    if (seconds === 0) {
+    const { answered } = this.props;
+    if (seconds === 0 || answered === 'respondido') {
       clearInterval(this.counter);
     }
   }
@@ -32,6 +34,12 @@ class Timer extends React.Component {
     const { seconds } = this.state;
     const { timer } = this.props;
     timer(seconds);
+  }
+
+  testClick = () => {
+    this.setState({
+      seconds: 10,
+    });
   }
 
   render() {
@@ -48,8 +56,12 @@ const mapDispatchToProps = (dispatch) => ({
   timer: (seconds) => dispatch(setTimer(seconds)),
 });
 
+const mapStateToProps = (store) => ({
+  answered: store.game.answered,
+});
+
 Timer.propTypes = {
   timer: PropTypes.number,
 }.isRequired;
 
-export default connect(null, mapDispatchToProps)(Timer);
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);

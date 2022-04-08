@@ -23,11 +23,11 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       score: action.payload,
     };
-  case 'ADD_CORRECT_ANSWER':
+  /* case 'ADD_CORRECT_ANSWER':
     return {
       ...state,
       qtdCorrectAnswers: [...qtdCorrectAnswers + action.payload],
-    };
+    }; */
   default:
     return state;
   }

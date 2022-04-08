@@ -7,12 +7,12 @@ import Timer from '../components/Timer';
 
 class Game extends Component {
   render() {
-    const { results } = this.props;
+    const { results, answered } = this.props;
     console.log(results);
     return (
       <div>
         <Header />
-        <Timer />
+        {answered === 'respondido' ? '' : <Timer />}
         <h1>Jogo</h1>
         <Question />
       </div>
@@ -22,6 +22,8 @@ class Game extends Component {
 
 const mapStateToProps = (state) => ({
   results: state.game.results,
+  current: state.game.currentQuestion,
+  answered: state.game.answered,
 });
 
 Game.propTypes = {

@@ -2,6 +2,7 @@ const INITIAL_STATE = {
   results: [],
   currentQuestion: 0,
   timer: 30,
+  answered: '',
 };
 
 const game = (state = INITIAL_STATE, action) => {
@@ -20,6 +21,12 @@ const game = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       currentQuestion: action.payload,
+      answered: 'respondendo',
+    };
+  case 'ANSWERED':
+    return {
+      ...state,
+      answered: 'respondido',
     };
   default:
     return state;
