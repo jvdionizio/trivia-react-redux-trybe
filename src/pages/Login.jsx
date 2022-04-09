@@ -67,7 +67,7 @@ render() {
     <main className={ `col-11 m-auto ${styles['main-login']}` }>
       <div className={ `${styles['login-container']}` }>
         <img
-          className={ `${styles['logo-image']} figure-img img-fluid rounded` }
+          className={ `${styles['logo-image']} img-fluid` }
           src={ Logo }
           alt="Trivia Logo"
         />
