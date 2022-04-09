@@ -1,0 +1,79 @@
+.main-login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.login-container {
+  background-color: var(--white);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  position: relative;
+}
+
+.logo-image {
+  margin-bottom: 2rem;
+  max-height: 30rem;
+}
+
+.input-login {
+  background: transparent;
+  background-color: var(--light-grey);
+  border: none;
+  border-radius: 6px;
+  color: var(--background-color);
+  display: block;
+  margin-bottom: 16px;
+  padding: 16px;
+  width: 100%;
+}
+
+.input-login:hover, .input-login:active, .input-login:focus {
+  font-weight: 600;
+  outline: none;
+}
+
+.button-play {
+  background-color: var(--purple);
+  border: none;
+  border-radius: 10px;
+  color: var(--white);
+  font-weight: 800;
+  padding: 15px;
+}
+
+.button-settings {
+  align-items: center;
+  background-color: var(--purple);
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  display: flex;
+  font-size: 2.5rem;
+  height: 4rem;
+  justify-content: center;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 4rem;
+}
+
+.button-play:hover, .button-settings:hover {
+  background-color: var(--pink);
+  cursor: pointer;
+}
+
+.button-play:disabled, .button-settings:disabled {
+  background-color: var(--purple-dark);
+  color: var(--light-grey);
+  cursor: auto;
+}
+
+.button-play:active, .button-settings:active {
+  box-shadow: 1px 4px 4px var(--blue-dark);
+}
+
