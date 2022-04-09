@@ -20,8 +20,6 @@ class Game extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  results: state.game.results,
-  current: state.game.currentQuestion,
   answered: state.game.answered,
 });
 

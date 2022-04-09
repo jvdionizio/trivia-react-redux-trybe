@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTimer } from '../Redux/Actions';
+import { answerQuestion, setTimer } from '../Redux/Actions';
 
 class Timer extends React.Component {
   constructor() {
@@ -21,10 +21,15 @@ class Timer extends React.Component {
 
   componentDidUpdate() {
     const { seconds } = this.state;
-    const { answered } = this.props;
-    if (seconds === 0 || answered === 'respondido') {
+    const { setAnswer } = this.props;
+    if (seconds === 0) {
       clearInterval(this.counter);
+      setAnswer();
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.counter);
   }
 
   handleSeconds = () => {
@@ -34,12 +39,6 @@ class Timer extends React.Component {
     const { seconds } = this.state;
     const { timer } = this.props;
     timer(seconds);
-  }
-
-  testClick = () => {
-    this.setState({
-      seconds: 10,
-    });
   }
 
   render() {
@@ -54,6 +53,7 @@ class Timer extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   timer: (seconds) => dispatch(setTimer(seconds)),
+  setAnswer: () => dispatch(answerQuestion()),
 });
 
 const mapStateToProps = (store) => ({

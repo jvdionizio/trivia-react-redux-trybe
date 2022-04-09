@@ -8,6 +8,8 @@ import '../styles/Question.css';
 import NextButton from './NextButton';
 import Loading from './Loading';
 
+const he = require('he');
+
 class Question extends Component {
   constructor() {
     super();
@@ -124,13 +126,16 @@ class Question extends Component {
   verifyTimer = () => {
     const { questionAnswered } = this.state;
     const { timer } = this.props;
+    /* if (timer === 0) {
+      setAnswer();
+    } */
     if (timer === 0 || questionAnswered === true) {
       return true;
     }
   }
 
   render() {
-    const { results, currentQuestion } = this.props;
+    const { results, currentQuestion, timer } = this.props;
     const { loading, answers, questionAnswered } = this.state;
     return (
       <div>
@@ -141,9 +146,12 @@ class Question extends Component {
               { questionAnswered && (currentQuestion < results.length - 1
                 ? <NextButton nextQuestion={ this.setNextQuestion } />
                 : <Link to="/feedback"><NextButton /></Link>) }
+              { timer === 0 && (currentQuestion < results.length - 1
+                ? <NextButton nextQuestion={ this.setNextQuestion } />
+                : <Link to="/feedback"><NextButton /></Link>) }
               <h2 data-testid="question-category">{results[currentQuestion].category}</h2>
               <p data-testid="question-text">
-                {results[currentQuestion].question}
+                {he.decode(results[currentQuestion].question)}
               </p>
               <div data-testid="answer-options">
                 {answers.map((answer, index) => (
@@ -155,7 +163,7 @@ class Question extends Component {
                     onClick={ () => this.handleClick(answer) }
                     disabled={ this.verifyTimer() }
                   >
-                    {answer}
+                    {he.decode(answer)}
                   </button>))}
               </div>
             </div>

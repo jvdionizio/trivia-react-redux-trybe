@@ -22,6 +22,7 @@ const game = (state = INITIAL_STATE, action) => {
       ...state,
       currentQuestion: action.payload,
       answered: 'respondendo',
+      timer: 30,
     };
   case 'ANSWERED':
     return {
