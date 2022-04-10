@@ -1,12 +1,10 @@
-.correct-answer {
-  border: 3px solid rgb(6, 240, 15);
+.answers-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.wrong-answer {
-  border: 3px solid red;
-}
-
-.button-answer {
+button {
   background-color: var(--purple);
   border: none;
   border-radius: 10px;

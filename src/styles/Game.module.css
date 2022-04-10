@@ -4,3 +4,9 @@
   min-height: 100vh;
   min-width: 100vw;
 }
+
+.timer-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}

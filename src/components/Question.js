@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addQtdCorrectAnswers, addScore,
-  answerQuestion, nextQuestion } from '../Redux/Actions';
+import {
+  addQtdCorrectAnswers, addScore,
+  answerQuestion, nextQuestion
+} from '../Redux/Actions';
 import '../styles/Question.css';
-import NextButton from './NextButton';
+import styles from '../styles/Question.module.css';
 import Loading from './Loading';
+import NextButton from './NextButton';
 
 const he = require('he');
 
@@ -142,7 +145,7 @@ class Question extends Component {
         {loading === true
           ? <Loading />
           : (
-            <div>
+            <>
               { questionAnswered && (currentQuestion < results.length - 1
                 ? <NextButton nextQuestion={ this.setNextQuestion } />
                 : <Link to="/feedback"><NextButton /></Link>) }
@@ -153,20 +156,24 @@ class Question extends Component {
               <p data-testid="question-text">
                 {he.decode(results[currentQuestion].question)}
               </p>
-              <div data-testid="answer-options">
+              <div
+                data-testid="answer-options"
+                className={ `${styles['answers-container']}` }
+              >
                 {answers.map((answer, index) => (
                   <button
                     type="button"
                     key={ index }
                     data-testid={ this.isCorrect(answer) }
                     className={ this.isActive(answer) }
+                    id={ `${styles['button-answer']}` }
                     onClick={ () => this.handleClick(answer) }
                     disabled={ this.verifyTimer() }
                   >
                     {he.decode(answer)}
                   </button>))}
               </div>
-            </div>
+            </>
           )}
       </div>
     );

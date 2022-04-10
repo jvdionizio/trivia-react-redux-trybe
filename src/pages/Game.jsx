@@ -12,8 +12,9 @@ class Game extends Component {
     return (
       <div className={ `${styles['game-container']}` }>
         <Header />
-        {answered === 'respondido' ? '' : <Timer />}
-        <h1>Jogo</h1>
+        <div className={ `${styles['timer-container']}` }>
+          {answered === 'respondido' ? '' : <Timer />}
+        </div>
         <Question />
       </div>
     );
