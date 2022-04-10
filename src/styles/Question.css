@@ -1,16 +1,15 @@
-.correct-answer {
-  border: 3px solid rgb(6, 240, 15);
+.correct-answer:defined {
+  border: 3px solid var(--green-trybe);
 }
 
-.wrong-answer {
-  border: 3px solid red;
+.correct-answer:disabled {
+  background-color: var(--green-dark);
 }
 
-.button-answer {
-  background-color: var(--purple);
-  border: none;
-  border-radius: 10px;
-  color: var(--white);
-  font-weight: 800;
-  padding: 15px;
+.wrong-answer:defined {
+  border: 3px solid var(--red-trybe);
+}
+
+.wrong-answer:disabled {
+  background-color: var(--pink-dark);
 }

@@ -8,7 +8,6 @@
   --pink-light: #F591AA;
   --white: #FFFFFF;
   --light-grey: #f5f5f5;
-  --red: #FF5757;
   --blue: #48CCD1;
   --blue-dark: #03989E;
   --blue-light: #00C2CB;
@@ -16,6 +15,9 @@
   --yellow: #FFBD59;
   --yellow-dark: #FF914D;
   --yellow-ligth: #FFDE59;
+  --green-dark: #0E8512;
+  --green-trybe: #06F00F;
+  --red-trybe: #ff0000;
 }
 
 ::selection {
