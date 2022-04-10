@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
 // import Header from '../components/Header';
-import Logo from '../images/trivia-night.svg';
+import Logo from '../images/trivia.svg';
 import { fetchToken, gravatarAction, nameAction } from '../Redux/Actions';
 import styles from '../styles/Login.module.css';
 
