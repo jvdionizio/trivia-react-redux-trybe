@@ -176,6 +176,7 @@ class Question extends Component {
                 col-11 m-auto row mb-3` }
               >
                 {answers.map((answer, index) => (
+                  <>
                   <button
                     type="button"
                     key={ index }
@@ -187,7 +188,9 @@ class Question extends Component {
                     disabled={ this.verifyTimer() }
                   >
                     {he.decode(answer)}
-                  </button>))}
+                  </button>
+                  <audio src='https://www.myinstants.com/media/sounds/vinheta-faustao-errou-rede-globo.mp3' autoplay controls/>
+                  </>))}
               </div>
             </>
           )}

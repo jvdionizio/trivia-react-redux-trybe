@@ -43,9 +43,9 @@ onInputChange = ({ target }) => {
 }
 
 handleClick = async () => {
-  const { getFetchToken, history, gravatarImg } = this.props;
+  const { getFetchToken, history, gravatarImg, link } = this.props;
   const { email } = this.state;
-  await getFetchToken();
+  await getFetchToken(link);
   gravatarImg(email);
   history.push('/game');
 }
@@ -114,13 +114,14 @@ render() {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getFetchToken: () => dispatch(fetchToken()),
+  getFetchToken: (link) => dispatch(fetchToken(link)),
   gravatarImg: (gravatar) => dispatch(gravatarAction(gravatar)),
   nameProp: (name) => dispatch(nameAction(name)),
 });
 
 const mapStateToProps = (state) => ({
   token: state.token,
+  link: state.game.linkQuestionsApi,
 });
 
 Login.propTypes = {
