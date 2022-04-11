@@ -3,8 +3,6 @@ import React from 'react';
 import { AiFillSetting } from 'react-icons/ai';
 import { connect } from 'react-redux';
 import '../App.css';
-import GameSettings from '../components/GameSettings';
-// import Header from '../components/Header';
 import Logo from '../images/trivia.svg';
 import { fetchToken, gravatarAction, nameAction } from '../Redux/Actions';
 import styles from '../styles/Login.module.css';
@@ -17,7 +15,6 @@ class Login extends React.Component {
       email: '',
       name: '',
       isButtonDisabled: true,
-      settings: false,
     };
   }
 
@@ -37,10 +34,8 @@ class Login extends React.Component {
   }
 
   settingsPage = () => {
-    const { settings } = this.state;
-    this.setState({
-      settings: !settings,
-    });
+    const { history } = this.props;
+    history.push('/settings');
   }
 
 onInputChange = ({ target }) => {
@@ -56,14 +51,9 @@ handleClick = async () => {
 }
 
 render() {
-  const { isButtonDisabled, name, settings, email } = this.state;
+  const { isButtonDisabled, name, email } = this.state;
   const { nameProp } = this.props;
   nameProp(name);
-  if (settings) {
-    return (
-      <GameSettings loginPage={ this.settingsPage } />
-    );
-  }
   return (
     <>
       {/* <Header /> */}

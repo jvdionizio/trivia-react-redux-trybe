@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import GameSettings from './components/GameSettings';
 import Feedback from './pages/Feedback';
 import Game from './pages/Game';
 import Login from './pages/Login';
@@ -12,6 +13,7 @@ export default function App() {
       <Route exact path="/game" component={ Game } />
       <Route exact path="/feedback" component={ Feedback } />
       <Route exact path="/ranking" component={ Ranking } />
+      <Route exact path="/settings" component={ GameSettings } />
     </Switch>
   );
 }
