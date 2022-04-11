@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { AiFillSetting } from 'react-icons/ai';
 import { connect } from 'react-redux';
 import '../App.css';
 import GameSettings from '../components/GameSettings';
+// import Header from '../components/Header';
+import Logo from '../images/trivia.svg';
 import { fetchToken, gravatarAction, nameAction } from '../Redux/Actions';
+import styles from '../styles/Login.module.css';
 
 class Login extends React.Component {
   constructor() {
@@ -62,42 +66,58 @@ render() {
   }
   return (
     <>
-      <label htmlFor="nameInput">
-        <input
-          type="text"
-          name="name"
-          data-testid="input-player-name"
-          id="nameInput"
-          value={ name }
-          onChange={ this.onInputChange }
-        />
-      </label>
+      {/* <Header /> */}
+      <main className={ `col-11 m-auto ${styles['main-login']}` }>
+        <div className={ `${styles['login-container']}` }>
+          <img
+            className={ `${styles['logo-image']} img-fluid` }
+            src={ Logo }
+            alt="Trivia Logo"
+          />
+          <label htmlFor="nameInput">
+            <input
+              type="text"
+              name="name"
+              data-testid="input-player-name"
+              id="nameInput"
+              value={ name }
+              onChange={ this.onInputChange }
+              placeholder="Digite o seu nome"
+              className={ styles['input-login'] }
+            />
+          </label>
 
-      <label htmlFor="gravatarEmailInput">
-        <input
-          type="email"
-          name="email"
-          id="gravatarEmailInput"
-          data-testid="input-gravatar-email"
-          onChange={ this.onInputChange }
-          value={ email }
-        />
-      </label>
-      <button
-        disabled={ isButtonDisabled }
-        type="button"
-        data-testid="btn-play"
-        onClick={ this.handleClick }
-      >
-        Play
-      </button>
-      <button
-        type="button"
-        data-testid="btn-settings"
-        onClick={ this.settingsPage }
-      >
-        Settings
-      </button>
+          <label htmlFor="gravatarEmailInput">
+            <input
+              type="email"
+              name="email"
+              id="gravatarEmailInput"
+              data-testid="input-gravatar-email"
+              onChange={ this.onInputChange }
+              value={ email }
+              placeholder="Digite o seu melhor email"
+              className={ styles['input-login'] }
+            />
+          </label>
+          <button
+            disabled={ isButtonDisabled }
+            type="button"
+            data-testid="btn-play"
+            onClick={ this.handleClick }
+            className={ `${styles['button-play']}` }
+          >
+            Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ this.settingsPage }
+            className={ `${styles['button-settings']}` }
+          >
+            <AiFillSetting />
+          </button>
+        </div>
+      </main>
     </>
   );
 }

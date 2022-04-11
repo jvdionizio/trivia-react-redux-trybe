@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addQtdCorrectAnswers, addScore,
-  answerQuestion, nextQuestion } from '../Redux/Actions';
+import {
+  addQtdCorrectAnswers, addScore,
+  answerQuestion, nextQuestion,
+} from '../Redux/Actions';
 import '../styles/Question.css';
-import NextButton from './NextButton';
+import styles from '../styles/Question.module.css';
 import Loading from './Loading';
+import NextButton from './NextButton';
 
 const he = require('he');
 
@@ -142,31 +145,51 @@ class Question extends Component {
         {loading === true
           ? <Loading />
           : (
-            <div>
-              { questionAnswered && (currentQuestion < results.length - 1
-                ? <NextButton nextQuestion={ this.setNextQuestion } />
-                : <Link to="/feedback"><NextButton /></Link>) }
-              { timer === 0 && (currentQuestion < results.length - 1
-                ? <NextButton nextQuestion={ this.setNextQuestion } />
-                : <Link to="/feedback"><NextButton /></Link>) }
-              <h2 data-testid="question-category">{results[currentQuestion].category}</h2>
-              <p data-testid="question-text">
-                {he.decode(results[currentQuestion].question)}
-              </p>
-              <div data-testid="answer-options">
+            <>
+              <div
+                className={ `${styles['question-container']} 
+              col-10 m-auto mb-3` }
+              >
+                <span
+                  data-testid="question-category"
+                >
+                  {results[currentQuestion].category}
+                </span>
+                <h2
+                  data-testid="question-text"
+                  className="m-auto"
+                >
+                  {he.decode(results[currentQuestion].question)}
+                </h2>
+                <div className={ `${styles['next-question-container']} col-lg-6 m-auto` }>
+                  { questionAnswered && (currentQuestion < results.length - 1
+                    ? <NextButton nextQuestion={ this.setNextQuestion } />
+                    : <Link to="/feedback"><NextButton /></Link>) }
+                  { timer === 0 && (currentQuestion < results.length - 1
+                    ? <NextButton nextQuestion={ this.setNextQuestion } />
+                    : <Link to="/feedback"><NextButton /></Link>) }
+                </div>
+              </div>
+              <div
+                data-testid="answer-options"
+                className={ `${styles['answers-container']} 
+                col-11 m-auto row mb-3` }
+              >
                 {answers.map((answer, index) => (
                   <button
                     type="button"
                     key={ index }
                     data-testid={ this.isCorrect(answer) }
-                    className={ this.isActive(answer) }
+                    className={
+                      `${styles['answer-text']} ${this.isActive(answer)} col-lg-5`
+                    }
                     onClick={ () => this.handleClick(answer) }
                     disabled={ this.verifyTimer() }
                   >
                     {he.decode(answer)}
                   </button>))}
               </div>
-            </div>
+            </>
           )}
       </div>
     );

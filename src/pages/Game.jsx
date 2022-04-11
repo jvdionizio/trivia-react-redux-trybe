@@ -4,15 +4,20 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Question from '../components/Question';
 import Timer from '../components/Timer';
+import styles from '../styles/Game.module.css';
 
 class Game extends Component {
   render() {
     const { answered } = this.props;
     return (
-      <div>
+      <div className={ `${styles['game-container']}` }>
         <Header />
-        {answered === 'respondido' ? '' : <Timer />}
-        <h1>Jogo</h1>
+        <div className={ `${styles['timer-container']}` }>
+          {answered === 'respondido' ? (
+            <span className={ `${styles['timer-background']}` }>
+              0
+            </span>) : <Timer />}
+        </div>
         <Question />
       </div>
     );

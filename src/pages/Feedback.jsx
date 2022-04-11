@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { newGame } from '../Redux/Actions';
+import styles from '../styles/Feedback.module.css';
 
 class Feedback extends Component {
   componentDidMount() {
@@ -41,44 +42,50 @@ class Feedback extends Component {
     const { assertions, score, playAgain } = this.props;
     const TRES = 3;
     return (
-      <>
+      <div className={ `${styles['feedback-container']}` }>
         <Header />
-        { assertions < TRES
-          ? (
-            <div>
-              <p data-testid="feedback-text">Could be better...</p>
+        <div className={ `${styles['message-container']} col-8 m-auto mt-5` }>
+          <div className={ `${styles['result-message']} col-8 mx-auto mb-5` }>
+            { assertions < TRES
+              ? (
+                <h1 data-testid="feedback-text">Could be better...</h1>
+              ) : (
+                <h1 data-testid="feedback-text">Well Done!</h1>
+              )}
+          </div>
+          <div className={ `${styles['result-container']} col-8 mx-auto mb-5` }>
+            <div className={ `${styles['score-container']} col-10 mx-auto` }>
+              <h3 className={ `${styles['h3-title']}` }>Score:</h3>
+              <h3 data-testid="feedback-total-score">{score}</h3>
             </div>
-          ) : (
-            <div>
-              <p data-testid="feedback-text">Well Done!</p>
+            <div className={ `${styles['assertions-container']} col-10 mx-auto` }>
+              <h3 className={ `${styles['h3-title']}` }>Assertions:</h3>
+              <h3 data-testid="feedback-total-question">{assertions}</h3>
             </div>
-          )}
-        <div>
-          <p>Placar:</p>
-          <span data-testid="feedback-total-score">{score}</span>
+          </div>
+          <div className={ `${styles['buttons-container']}` }>
+            <Link to="/">
+              <button
+                type="button"
+                data-testid="btn-play-again"
+                onClick={ playAgain }
+                className={ `${styles.button}` }
+              >
+                Play Again
+              </button>
+            </Link>
+            <Link to="/ranking">
+              <button
+                type="button"
+                data-testid="btn-ranking"
+                className={ `${styles.button}` }
+              >
+                Ranking
+              </button>
+            </Link>
+          </div>
         </div>
-        <div>
-          <p>Acertos:</p>
-          <span data-testid="feedback-total-question">{assertions}</span>
-        </div>
-        <div>
-          <Link to="/">
-            <button
-              type="button"
-              data-testid="btn-play-again"
-              onClick={ playAgain }
-            >
-              Play Again
-
-            </button>
-          </Link>
-        </div>
-        <div>
-          <Link to="/ranking">
-            <button type="button" data-testid="btn-ranking">Ranking</button>
-          </Link>
-        </div>
-      </>
+      </div>
     );
   }
 }

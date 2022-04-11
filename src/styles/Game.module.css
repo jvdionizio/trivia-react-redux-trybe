@@ -1,0 +1,34 @@
+.game-container {
+  background-color: #f7f7f7;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6.172L6.172 0h5.656L0 11.828V6.172zm40 5.656L28.172 0h5.656L40 6.172v5.656zM6.172 12l12-12h3.656l12 12h-5.656L20 3.828 11.828 12H6.172zm12 0L20 10.172 21.828 12h-3.656z' fill='%23e5e5e5' fill-opacity='0.71' fill-rule='evenodd'/%3E%3C/svg%3E");
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.timer-container {
+  align-items: center;
+  display: flex;
+  font-size: 2rem;
+  font-weight: 600;
+  justify-content: center;
+  min-height: 13vh;
+}
+
+.timer-background {
+  align-items: center;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 50%;
+  color: var(--white);
+  display: flex;
+  font-size: 2rem;
+  height: 4rem;
+  justify-content: center;
+  padding: 1rem;
+  width: 4rem;
+}
+
+.timer {
+  font-size: 2rem;
+  font-weight: 600;
+}
