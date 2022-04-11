@@ -3,32 +3,84 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { newGame } from '../Redux/Actions';
+import styles from '../styles/Ranking.module.css';
 
 class Ranking extends Component {
   render() {
     const { playAgain } = this.props;
     const ranking = JSON.parse(localStorage.getItem('ranking'));
     return (
-      <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
-        {
-          ranking.sort((a, b) => b.score - a.score).map((player, index) => (
-            <div key={ index }>
-              <img src={ player.picture } alt="Player gravatar" />
-              <span data-testid={ `player-name-${index}` }>{player.name}</span>
-              <span data-testid={ `player-score-${index}` }>{player.score}</span>
-            </div>
-          ))
-        }
-        <Link to="/">
-          <button
-            type="button"
-            data-testid="btn-go-home"
-            onClick={ playAgain }
+      <div className={ `${styles['ranking-background']}` }>
+        <div className={ `${styles['ranking-container']} col-10 m-auto` }>
+
+          <h1
+            data-testid="ranking-title"
+            className={ `${styles['ranking-title']} col-12` }
           >
-            Play Again
-          </button>
-        </Link>
+            Ranking
+          </h1>
+
+          <div className={ `${styles['info-container']} col-12` }>
+
+            {/* <div className="col-md-5 m-auto">
+              <Podium />
+            </div> */}
+
+            <div className="col-10 m-auto">
+              {
+                ranking.sort((a, b) => b.score - a.score).map((player, index) => (
+                  <div
+                    key={ index }
+                    className={ `${styles['players-list']} col-6 m-auto mb-3` }
+                  >
+                    <img
+                      src={ player.picture }
+                      alt="Player gravatar"
+                      className={ `${styles['gravatar-image']}` }
+                    />
+                    <div className={ `${styles['span-container']}` }>
+                      <span className={ `${styles['span-text']}` }>
+                        Name:
+                      </span>
+                      <span
+                        data-testid={ `player-name-${index}` }
+                        className={ `${styles['span-result']}` }
+                      >
+                        {`${player.name}`}
+                      </span>
+                    </div>
+                    <div className={ `${styles['span-container']}` }>
+                      <span className={ `${styles['span-text']}` }>
+                        Score:
+                      </span>
+                      <span
+                        data-testid={ `player-score-${index}` }
+                        className={ `${styles['span-result']}` }
+                      >
+                        {`${player.score}`}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+
+          </div>
+
+          <div className={ `${styles['play-again-container']}` }>
+            <Link to="/">
+              <button
+                type="button"
+                data-testid="btn-go-home"
+                onClick={ playAgain }
+                className={ `${styles.button}` }
+              >
+                Play Again
+              </button>
+            </Link>
+          </div>
+
+        </div>
       </div>
     );
   }

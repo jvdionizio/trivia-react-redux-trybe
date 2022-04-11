@@ -1,0 +1,71 @@
+.ranking-background {
+  background-color: #f7f7f7;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6.172L6.172 0h5.656L0 11.828V6.172zm40 5.656L28.172 0h5.656L40 6.172v5.656zM6.172 12l12-12h3.656l12 12h-5.656L20 3.828 11.828 12H6.172zm12 0L20 10.172 21.828 12h-3.656z' fill='%23e5e5e5' fill-opacity='0.71' fill-rule='evenodd'/%3E%3C/svg%3E");
+  display: flex;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.ranking-container {
+  align-items: center;
+  background-color: var(--light-grey);
+  border: 3px solid var(--background-color);
+  border-radius: 20px;
+  box-shadow: 9px 9px 1px var(--yellow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 90vh;
+}
+
+.info-container {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.ranking-title {
+  text-align: center;
+}
+
+.button {
+  background-color: var(--pink);
+  border: none;
+  border-radius: 10px;
+  color: var(--white);
+  font-weight: 800;
+  margin: 20px 30px;
+  padding: 15px;
+}
+
+.gravatar-image {
+  border-radius: 50%;
+  height: 50px;
+  margin-right: 1rem;
+  width: 50px;
+}
+
+.players-list {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.span-text {
+  font-size: 1.2rem;
+  font-size-adjust: auto;
+  font-weight: 700;
+  margin-right: 5px;
+  text-decoration: 3px solid underline;
+  text-decoration-color: var(--pink);
+}
+
+.span-result {
+  font-size: 1.2rem;
+  font-size-adjust: auto;
+  margin-right: 20px;
+}
+
+.span-container {
+  display: flex;
+}
