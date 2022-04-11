@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   currentQuestion: 0,
   timer: 30,
   answered: '',
+  linkQuestionsApi: 'https://opentdb.com/api.php?amount=5',
 };
 
 const game = (state = INITIAL_STATE, action) => {
@@ -35,6 +36,11 @@ const game = (state = INITIAL_STATE, action) => {
       currentQuestion: 0,
       timer: 30,
       answered: '',
+    };
+  case 'ADD_SETTINGS':
+    return {
+      ...state,
+      linkQuestionsApi: action.payload,
     };
   default:
     return state;

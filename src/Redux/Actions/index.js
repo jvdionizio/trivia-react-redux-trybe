@@ -10,12 +10,12 @@ function getGameInfo(json) {
   return { type: 'GET_GAME_INFO', payload: json.results };
 }
 
-export function fetchToken() {
+export function fetchToken(link) {
   return (dispatch) => (
     fetch('https://opentdb.com/api_token.php?command=request')
       .then((response) => response.json())
       .then((json) => dispatch(getToken(json)))
-      .then((result) => fetch(`https://opentdb.com/api.php?amount=5&token=${result.payload}`))
+      .then((result) => fetch(`${link}&token=${result.payload}`))
       .then((response) => response.json())
       .then((json) => dispatch(getGameInfo(json)))
       .catch((error) => dispatch(failedRequest(error))));
@@ -53,4 +53,8 @@ export function addQtdCorrectAnswers(answer) {
 
 export function newGame() {
   return { type: 'NEW_GAME' };
+}
+
+export function addSettings(value) {
+  return { type: 'ADD_SETTINGS', payload: value };
 }
