@@ -4,6 +4,7 @@
   --purple: #6558B1;
   --purple-dark: #37305f;
   --pink: #EF3094;
+  --pink-accent: #ff99ce;
   --pink-dark: #B14264;
   --pink-light: #F591AA;
   --white: #FFFFFF;
@@ -21,7 +22,7 @@
 }
 
 ::selection {
-  background-color: var(--blue-accent);
+  background-color: var(--pink-accent);
 }
 
 * {
