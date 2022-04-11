@@ -24,9 +24,9 @@
 .question-container {
   align-items: center;
   background-color: var(--light-grey);
-  border: 1px solid var(--pink);
+  border: 3px solid var(--background-color);
   border-radius: 10px;
-  box-shadow: 5px 5px 1px var(--pink-dark);
+  box-shadow: 9px 9px 1px var(--yellow);
   display: flex;
   flex-direction: column;
   justify-content: center;
