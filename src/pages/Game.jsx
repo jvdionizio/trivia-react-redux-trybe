@@ -13,7 +13,10 @@ class Game extends Component {
       <div className={ `${styles['game-container']}` }>
         <Header />
         <div className={ `${styles['timer-container']}` }>
-          {answered === 'respondido' ? '' : <Timer />}
+          {answered === 'respondido' ? (
+            <span className={ `${styles['timer-background']}` }>
+              0
+            </span>) : <Timer />}
         </div>
         <Question />
       </div>

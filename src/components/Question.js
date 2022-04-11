@@ -146,20 +146,34 @@ class Question extends Component {
           ? <Loading />
           : (
             <>
-              { questionAnswered && (currentQuestion < results.length - 1
-                ? <NextButton nextQuestion={ this.setNextQuestion } />
-                : <Link to="/feedback"><NextButton /></Link>) }
-              { timer === 0 && (currentQuestion < results.length - 1
-                ? <NextButton nextQuestion={ this.setNextQuestion } />
-                : <Link to="/feedback"><NextButton /></Link>) }
-              <h2 data-testid="question-category">{results[currentQuestion].category}</h2>
-              <p data-testid="question-text">
-                {he.decode(results[currentQuestion].question)}
-              </p>
+              <div
+                className={ `${styles['question-container']} 
+              col-10 m-auto mb-3` }
+              >
+                <span
+                  data-testid="question-category"
+                >
+                  {results[currentQuestion].category}
+                </span>
+                <h2
+                  data-testid="question-text"
+                  className="m-auto"
+                >
+                  {he.decode(results[currentQuestion].question)}
+                </h2>
+                <div className={ `${styles['next-question-container']} col-lg-6 m-auto` }>
+                  { questionAnswered && (currentQuestion < results.length - 1
+                    ? <NextButton nextQuestion={ this.setNextQuestion } />
+                    : <Link to="/feedback"><NextButton /></Link>) }
+                  { timer === 0 && (currentQuestion < results.length - 1
+                    ? <NextButton nextQuestion={ this.setNextQuestion } />
+                    : <Link to="/feedback"><NextButton /></Link>) }
+                </div>
+              </div>
               <div
                 data-testid="answer-options"
                 className={ `${styles['answers-container']} 
-                col-11 m-auto row` }
+                col-11 m-auto row mb-3` }
               >
                 {answers.map((answer, index) => (
                   <button

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { answerQuestion, setTimer } from '../Redux/Actions';
+import styles from '../styles/Game.module.css';
 
 class Timer extends React.Component {
   constructor() {
@@ -44,9 +45,10 @@ class Timer extends React.Component {
   render() {
     const { seconds } = this.state;
     return (
-      <div>
-        <span>{seconds}</span>
-      </div>);
+      <div className={ `${styles['timer-background']}` }>
+        <span className={ `${styles.timer}` }>{seconds}</span>
+      </div>
+    );
   }
 }
 
