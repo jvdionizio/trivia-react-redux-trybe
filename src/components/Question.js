@@ -158,7 +158,8 @@ class Question extends Component {
               </p>
               <div
                 data-testid="answer-options"
-                className={ `${styles['answers-container']} container col-11 m-auto` }
+                className={ `${styles['answers-container']} 
+                col-11 m-auto row` }
               >
                 {answers.map((answer, index) => (
                   <button
@@ -166,7 +167,7 @@ class Question extends Component {
                     key={ index }
                     data-testid={ this.isCorrect(answer) }
                     className={
-                      `${styles['answer-text']} ${this.isActive(answer)}`
+                      `${styles['answer-text']} ${this.isActive(answer)} col-lg-5`
                     }
                     onClick={ () => this.handleClick(answer) }
                     disabled={ this.verifyTimer() }
