@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   addQtdCorrectAnswers, addScore,
-  answerQuestion, nextQuestion
+  answerQuestion, nextQuestion,
 } from '../Redux/Actions';
 import '../styles/Question.css';
 import styles from '../styles/Question.module.css';
