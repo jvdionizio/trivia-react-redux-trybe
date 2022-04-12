@@ -43,18 +43,23 @@
   padding: 15px;
 }
 
+.gravatar-container {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .gravatar-image {
   border-radius: 50%;
-  height: 50px;
-  margin-right: 1rem;
-  width: 50px;
+  height: 62px;
+  width: 62px;
 }
 
 .players-list {
   align-items: center;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .span-text {
@@ -70,8 +75,16 @@
   font-size: 1.2rem;
   font-size-adjust: auto;
   margin-right: 20px;
+  text-size-adjust: auto;
 }
 
 .span-container {
+  align-content: flex-start;
   display: flex;
+  flex-flow: column wrap;
+}
+
+.span-div {
+  display: flex;
+  flex-flow: row wrap;
 }

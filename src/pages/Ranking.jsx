@@ -26,40 +26,46 @@ class Ranking extends Component {
               <Podium />
             </div> */}
 
-            <div className="col-10 m-auto">
+            <div className="col-11 m-auto">
               {
                 ranking.sort((a, b) => b.score - a.score).map((player, index) => (
                   <div
                     key={ index }
-                    className={ `${styles['players-list']} col-6 m-auto mb-3` }
+                    className={ `${styles['players-list']} col-8 m-auto mb-3` }
                   >
-                    <img
-                      src={ player.picture }
-                      alt="Player gravatar"
-                      className={ `${styles['gravatar-image']}` }
-                    />
-                    <div className={ `${styles['span-container']}` }>
-                      <span className={ `${styles['span-text']}` }>
-                        Name:
-                      </span>
-                      <span
-                        data-testid={ `player-name-${index}` }
-                        className={ `${styles['span-result']}` }
-                      >
-                        {`${player.name}`}
-                      </span>
+                    <div className={ `${styles['gravatar-container']} col-5` }>
+                      <img
+                        src={ player.picture }
+                        alt="Player gravatar"
+                        className={ `${styles['gravatar-image']}` }
+                      />
                     </div>
-                    <div className={ `${styles['span-container']}` }>
-                      <span className={ `${styles['span-text']}` }>
-                        Score:
-                      </span>
-                      <span
-                        data-testid={ `player-score-${index}` }
-                        className={ `${styles['span-result']}` }
-                      >
-                        {`${player.score}`}
-                      </span>
+                    <span className="col-1" />
+                    <div className={ `${styles['span-container']} col-5` }>
+                      <div className={ `${styles['span-div']}` }>
+                        <span className={ `${styles['span-text']}` }>
+                          Name:
+                        </span>
+                        <span
+                          data-testid={ `player-name-${index}` }
+                          className={ `${styles['span-result']}` }
+                        >
+                          {`${player.name}`}
+                        </span>
+                      </div>
+                      <div className={ `${styles['span-div']}` }>
+                        <span className={ `${styles['span-text']}` }>
+                          Score:
+                        </span>
+                        <span
+                          data-testid={ `player-score-${index}` }
+                          className={ `${styles['span-result']}` }
+                        >
+                          {`${player.score}`}
+                        </span>
+                      </div>
                     </div>
+
                   </div>
                 ))
               }
