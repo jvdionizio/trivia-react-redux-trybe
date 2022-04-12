@@ -11,6 +11,7 @@ class Ranking extends Component {
     return (
       <div>
         <h1 data-testid="ranking-title">Ranking</h1>
+        <audio src="https://www.myinstants.com/media/sounds/queen-we-are-the-champions-mp3cut_0owsUJJ.mp3" autoPlay={true} />
         {
           ranking.sort((a, b) => b.score - a.score).map((player, index) => (
             <div key={ index }>

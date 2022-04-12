@@ -44,6 +44,7 @@ class Feedback extends Component {
     return (
       <div className={ `${styles['feedback-container']}` }>
         <Header />
+        <audio src="https://www.myinstants.com/media/sounds/victoryff.swf.mp3" autoPlay={true} />
         <div className={ `${styles['message-container']} col-8 m-auto mt-5` }>
           <div className={ `${styles['result-message']} col-8 mx-auto mb-5` }>
             { assertions < TRES

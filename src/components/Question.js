@@ -23,6 +23,8 @@ class Question extends Component {
       loading: true,
       color: false,
       questionAnswered: false,
+      win: false,
+      loose: false,
     };
   }
 
@@ -41,6 +43,8 @@ class Question extends Component {
       btnNextQuestion(currentQuestion + 1);
       this.setState({
         color: false,
+        win: false,
+        loose: false,
         correctAnswer: results[currentQuestion + 1].correct_answer,
         questionAnswered: false,
         answers: [...results[currentQuestion + 1].incorrect_answers,
@@ -102,8 +106,17 @@ class Question extends Component {
     if (correctAnswer === answer) {
       newScore(score + DEZ + (difficultyValue * timer));
       countCorrectAnswers(assertions + 1);
+      this.setState({
+        win: true,
+      });
+    } else {
+      this.setState({
+        loose: true,
+      });
     }
   };
+
+  errou = () => true
 
   handleClick = (selected) => {
     const { timer, results, currentQuestion, setAnswer } = this.props;
@@ -139,7 +152,7 @@ class Question extends Component {
 
   render() {
     const { results, currentQuestion, timer } = this.props;
-    const { loading, answers, questionAnswered } = this.state;
+    const { loading, answers, questionAnswered, win, loose } = this.state;
     return (
       <div>
         {loading === true
@@ -150,6 +163,12 @@ class Question extends Component {
                 className={ `${styles['question-container']} 
               col-10 m-auto mb-3` }
               >
+                {win === true ? <audio src="https://www.myinstants.com/media/sounds/barabannn.mp3" autoPlay={true} /> : ''}
+                {loose === true ? <audio src="https://www.myinstants.com/media/sounds/vinheta-faustao-errou-rede-globo.mp3" autoPlay={true} /> : ''
+                // https://www.myinstants.com/media/sounds/vinheta-faustao-errou-rede-globo.mp3
+                // https://www.myinstants.com/media/sounds/tmp61fq4oi1.mp3
+                }
+
                 <span
                   data-testid="question-category"
                 >
@@ -176,7 +195,6 @@ class Question extends Component {
                 col-11 m-auto row mb-3` }
               >
                 {answers.map((answer, index) => (
-                  <>
                   <button
                     type="button"
                     key={ index }
@@ -188,9 +206,7 @@ class Question extends Component {
                     disabled={ this.verifyTimer() }
                   >
                     {he.decode(answer)}
-                  </button>
-                  <audio src='https://www.myinstants.com/media/sounds/vinheta-faustao-errou-rede-globo.mp3' autoplay controls/>
-                  </>))}
+                  </button>))}
               </div>
             </>
           )}
