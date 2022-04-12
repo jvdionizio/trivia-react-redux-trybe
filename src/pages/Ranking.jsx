@@ -19,7 +19,7 @@ class Ranking extends Component {
           >
             Ranking
           </h1>
-
+          <audio src="https://www.myinstants.com/media/sounds/queen-we-are-the-champions-mp3cut_0owsUJJ.mp3" autoPlay={true} />
           <div className={ `${styles['info-container']} col-12` }>
 
             {/* <div className="col-md-5 m-auto">
