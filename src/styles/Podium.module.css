@@ -1,0 +1,33 @@
+.podium-container {
+  min-height: 80%;
+}
+
+.podium-title {
+  text-align: center;
+}
+
+.podium-col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.podium-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.podium-1 {
+  background: gold;
+  height: 140px;
+}
+
+.podium-2 {
+  background: silver;
+  height: 140px;
+}
+
+.podium-3 {
+  background: red;
+  height: 140px;
+}

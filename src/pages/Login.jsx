@@ -55,8 +55,7 @@ render() {
   const { nameProp } = this.props;
   nameProp(name);
   return (
-    <>
-      {/* <Header /> */}
+    <div className={ `${styles['login-background']}` }>
       <main className={ `col-11 m-auto ${styles['main-login']}` }>
         <div className={ `${styles['login-container']}` }>
           <img
@@ -108,7 +107,7 @@ render() {
           </button>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 }
