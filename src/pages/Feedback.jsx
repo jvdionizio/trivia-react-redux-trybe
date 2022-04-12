@@ -48,9 +48,19 @@ class Feedback extends Component {
           <div className={ `${styles['result-message']} col-8 mx-auto mb-5` }>
             { assertions < TRES
               ? (
-                <h1 data-testid="feedback-text">Could be better...</h1>
+                <h1
+                  data-testid="feedback-text"
+                  className={ `${styles['message-text']}` }
+                >
+                  Could be better...
+                </h1>
               ) : (
-                <h1 data-testid="feedback-text">Well Done!</h1>
+                <h1
+                  data-testid="feedback-text"
+                  className={ `${styles['message-text']}` }
+                >
+                  Well Done!
+                </h1>
               )}
           </div>
           <div className={ `${styles['result-container']} col-8 mx-auto mb-5` }>

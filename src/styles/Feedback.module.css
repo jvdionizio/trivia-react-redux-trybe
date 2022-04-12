@@ -32,7 +32,7 @@
 .buttons-container {
   align-items: center;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
 }
 
@@ -44,4 +44,29 @@
   font-weight: 800;
   margin: 20px 30px;
   padding: 15px;
+}
+
+.button:hover {
+  background-color: var(--pink-accent);
+  cursor: pointer;
+}
+
+.button:active {
+  box-shadow: 3px 3px 5px var(--blue-dark);
+}
+
+.message-text {
+  font-weight: 600;
+  text-decoration: wavy;
+  text-decoration-color: var(--pink);
+  text-decoration-line: underline;
+  text-underline-offset: 10px;
+}
+
+@media screen and ( max-width : 666px ) {
+
+  .message-text {
+    font-weight: 600;
+    text-decoration: none;
+  }
 }

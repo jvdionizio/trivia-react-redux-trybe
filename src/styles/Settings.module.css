@@ -23,10 +23,12 @@
 }
 
 .settings-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
-  text-decoration: underline;
+  text-decoration: wavy;
   text-decoration-color: var(--pink);
+  text-decoration-line: underline;
+  text-underline-offset: 10px;
 }
 
 .form-label {
