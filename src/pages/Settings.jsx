@@ -41,11 +41,16 @@ class GameSettings extends React.Component {
     return (
       <div className={ `${styles['settings-background']}` }>
         <div className={ `${styles['settings-container']} col-10 m-auto` }>
-          <h2 data-testid="settings-title"> Settings </h2>
+          <h2
+            data-testid="settings-title"
+            className={ `${styles['settings-title']}` }
+          >
+            Settings
+          </h2>
           <form
             action=""
             method="post"
-            className={ `${styles['form-container']} col-10 m-auto` }
+            className={ `${styles['form-container']} col-10` }
           >
             <label
               htmlFor="numberOfQuestions"
@@ -140,9 +145,9 @@ class GameSettings extends React.Component {
             type="button"
             data-testid="btn-settings"
             onClick={ this.loginPage }
+            className={ `${styles['save-button']}` }
           >
-            {' '}
-            Voltar
+            Save changes
           </button>
 
         </div>

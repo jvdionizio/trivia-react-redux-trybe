@@ -11,7 +11,6 @@
   background-color: var(--white);
   border: 3px solid var(--background-color);
   border-radius: 20px;
-  box-shadow: 9px 9px 1px var(--yellow);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -21,6 +20,13 @@
 .form-container {
   display: flex;
   flex-direction: column;
+}
+
+.settings-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--pink);
 }
 
 .form-label {
@@ -38,4 +44,22 @@
   margin-bottom: 16px;
   padding: 16px;
   width: 100%;
+}
+
+.save-button {
+  background-color: var(--purple);
+  border: none;
+  border-radius: 10px;
+  color: var(--white);
+  font-weight: 800;
+  padding: 15px;
+}
+
+.save-button:hover {
+  background-color: var(--pink);
+  cursor: pointer;
+}
+
+.save-button:active {
+  box-shadow: 1px 4px 4px var(--blue-dark);
 }
